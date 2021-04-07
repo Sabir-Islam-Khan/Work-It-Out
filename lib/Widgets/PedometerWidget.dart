@@ -89,81 +89,153 @@ class _ActivityCardState extends State<ActivityCard> {
     return BaseWidget(
       builder: (context, sizingInfo) => Container(
         child: InkWell(
-          child: Card(
-            color: Colors.grey[100],
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20))),
-            margin: EdgeInsets.all(10),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: totalHeight * 0.01,
-                  ),
-                  Row(
+          child: Column(
+            children: [
+              Card(
+                color: Colors.grey[100],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                margin: EdgeInsets.all(10),
+                child: Center(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.directions_walk,
-                        size: 25,
-                        color: Color(0xff4CAF50),
+                    children: <Widget>[
+                      SizedBox(
+                        height: totalHeight * 0.01,
                       ),
-                      Text(
-                        'Steps',
-                        style: TextStyle(
-                          color: Color(0xff4CAF50),
-                          fontSize: 16.0,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.directions_walk,
+                            size: 25,
+                            color: Color(0xff4CAF50),
+                          ),
+                          Text(
+                            'Steps',
+                            style: TextStyle(
+                              color: Color(0xff4CAF50),
+                              fontSize: 16.0,
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: CircularPercentIndicator(
+                                radius: 150.0,
+                                lineWidth: 15.0,
+                                animation: true,
+                                percent: percentCalc,
+                                center: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "$_steps",
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "/$personalStepChoice",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Steps taken',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      )
+                      ),
+                      SizedBox(
+                        height: totalHeight * 0.01,
+                      ),
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: CircularPercentIndicator(
-                            radius: 150.0,
-                            lineWidth: 15.0,
-                            animation: true,
-                            percent: percentCalc,
-                            center: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "$_steps",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "/$personalStepChoice",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                Text(
-                                  'Steps taken',
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                              ],
+                ),
+              ),
+              Card(
+                color: Colors.grey[100],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                margin: EdgeInsets.all(10),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Column(children: [
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Text(
+                            'Excercise',
+                            style: TextStyle(
+                              fontSize: 18.0,
                             ),
                           ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Icon(
+                            _status == 'walking'
+                                ? Icons.directions_walk
+                                : _status == 'stopped'
+                                    ? Icons.accessibility_new
+                                    : Icons.self_improvement,
+                            color: Colors.green,
+                            size: 35,
+                          ),
+                        ]),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 15.0, 0, 0),
+                        child: Column(
+                          children: [
+                            Text('Total Calory Burnt'),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.local_fire_department,
+                                  color: Colors.red,
+                                  size: 35,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${caloriBurnt.toStringAsFixed(2)} cal.",
+                                  style: TextStyle(fontSize: 15.0),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: totalHeight * 0.01,
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
