@@ -79,7 +79,7 @@ class _ActivityCardState extends State<ActivityCard> {
   Widget build(BuildContext context) {
     // total height and weight
     double totalHeight = MediaQuery.of(context).size.height;
-    double totalWidth = MediaQuery.of(context).size.width;
+
     int steps = int.parse(_steps);
     var percentCalc = (steps / personalStepChoice);
     double caloriBurnt = (.032 * steps);
@@ -166,6 +166,9 @@ class _ActivityCardState extends State<ActivityCard> {
                     ],
                   ),
                 ),
+              ),
+              SizedBox(
+                height: totalHeight * 0.02,
               ),
               Card(
                 color: Colors.grey[100],

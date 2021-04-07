@@ -53,7 +53,7 @@ class _CreateAccountState extends State<CreateAccount> {
     return MaterialApp(
       home: Scaffold(
         // appbar
-
+        resizeToAvoidBottomInset: false,
         // main body
         // checking loading status
         body: isLoading == true
