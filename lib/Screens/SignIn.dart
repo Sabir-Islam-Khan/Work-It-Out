@@ -98,6 +98,7 @@ class _SignInState extends State<SignIn> {
     return MaterialApp(
       home: Scaffold(
         // main body
+        resizeToAvoidBottomInset: false,
 
         // checking loading status
         body: loading == true
