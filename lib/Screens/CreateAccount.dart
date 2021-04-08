@@ -21,14 +21,13 @@ class _CreateAccountState extends State<CreateAccount> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
-  final numberController = TextEditingController();
-  final designationController = TextEditingController();
+  final ageController = TextEditingController();
+  final weightController = TextEditingController();
   // bool variable to check loading state
   bool isLoading = false;
 
   // method to push user data in firebase
-  void createData(
-      String name, String email, String number, String designation) async {
+  void createData(String name, String email, String age, String weight) async {
     Auth _auth = Auth();
 
     User _user = await _auth.currentUser();
@@ -37,9 +36,20 @@ class _CreateAccountState extends State<CreateAccount> {
       {
         'name': name,
         'email': email,
-        'number': number,
-        'designation': designation,
-        'isApproved': false,
+        'age': age,
+        'weight': weight,
+        'day1': 0,
+        'day1Steps': 0,
+        'day2': 0,
+        'day2Steps': 0,
+        'day3': 0,
+        'day3Steps': 0,
+        'day4': 0,
+        'day4Steps': 0,
+        'day5': 0,
+        'day5Steps': 0,
+        'day6': 0,
+        'day6Steps': 0,
       },
     );
   }
@@ -138,7 +148,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                   borderSide: BorderSide(
                                 color: Colors.white,
                               )),
-                              labelText: 'Name',
+                              labelText: 'Name:',
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               ),
@@ -168,16 +178,16 @@ class _CreateAccountState extends State<CreateAccount> {
                                   borderSide: BorderSide(
                                 color: Colors.white,
                               )),
-                              labelText: 'Mobile Number',
+                              labelText: 'Age:',
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               ),
-                              hintText: "Give your phone number ",
+                              hintText: "Tell us your Age",
                               hintStyle: TextStyle(
                                 color: Colors.grey[200],
                               ),
                             ),
-                            controller: numberController,
+                            controller: ageController,
                           ),
                         ),
                       ),
@@ -192,21 +202,22 @@ class _CreateAccountState extends State<CreateAccount> {
                         Container(
                           width: totalWidth * 0.9,
                           child: TextField(
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                 color: Colors.white,
                               )),
-                              labelText: 'Designation',
+                              labelText: 'Weight',
                               labelStyle: TextStyle(
                                 color: Colors.white,
                               ),
-                              hintText: "Your designation in company",
+                              hintText: "Your weight in KGs : ",
                               hintStyle: TextStyle(
                                 color: Colors.grey[200],
                               ),
                             ),
-                            controller: designationController,
+                            controller: weightController,
                           ),
                         ),
                       ),
@@ -324,8 +335,8 @@ class _CreateAccountState extends State<CreateAccount> {
                                 createData(
                                   nameController.value.text,
                                   emailController.value.text,
-                                  numberController.value.text,
-                                  designationController.value.text,
+                                  ageController.value.text,
+                                  weightController.value.text,
                                 );
                               }
                             } catch (e) {
@@ -359,6 +370,8 @@ class _CreateAccountState extends State<CreateAccount> {
                             emailController.clear();
                             passwordController.clear();
                             nameController.clear();
+                            ageController.clear();
+                            weightController.clear();
                           },
 
                           // main button

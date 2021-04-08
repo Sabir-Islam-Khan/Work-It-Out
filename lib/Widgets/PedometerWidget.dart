@@ -1,7 +1,9 @@
 //Weather update card calling from pages.Home.dart
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:work_it_out/services/Auth.dart';
 import '../Widgets/BaseWidget.dart';
 import 'dart:async';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -26,7 +28,11 @@ class _ActivityCardState extends State<ActivityCard> {
   void initState() {
     super.initState();
     initPlatformState();
+    getUid();
+    readData();
   }
+
+  CollectionReference users = Firestore.instance.collection('Users');
 
 //get count step
   void onStepCount(StepCount event) {
@@ -34,6 +40,27 @@ class _ActivityCardState extends State<ActivityCard> {
     setState(() {
       _steps = event.steps.toString();
     });
+  }
+
+  String test = " ";
+
+  Future<String> getUid() async {
+    User user = await Auth().currentUser();
+    setState(() {
+      test = user.uid;
+    });
+
+    print(user.uid);
+    return user.uid.toString();
+  }
+
+  // database data
+  Future<void> readData() async {
+    String uid = await getUid();
+    DocumentSnapshot data =
+        await Firestore.instance.collection('Users').document(uid).get();
+
+    print(data['name']);
   }
 
 // get activity status change

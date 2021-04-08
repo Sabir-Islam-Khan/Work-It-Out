@@ -1,3 +1,4 @@
+import 'package:work_it_out/Screens/SignIn.dart';
 import 'package:work_it_out/Widgets/PedometerWidget.dart';
 import 'package:work_it_out/Widgets/WeatherCard.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
@@ -86,7 +87,12 @@ class _HomePageState extends State<HomePage> {
               print("ready to perform logout");
             });
             _signOut();
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SignIn(auth: widget.auth),
+              ),
+            );
             setState(() {
               print("logged out");
             });

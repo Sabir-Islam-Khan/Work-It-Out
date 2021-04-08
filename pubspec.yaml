@@ -33,6 +33,8 @@ dependencies:
   flutter_icons: ^1.1.0
   geolocator: ^6.1.13
   weather: ^1.2.4
+  jiffy: ^3.0.1
+  hive: ^1.4.1+1
   flutter:
     sdk: flutter
 
