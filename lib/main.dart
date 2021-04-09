@@ -16,7 +16,7 @@ class WorkItOut extends StatelessWidget {
     //Remove this method to stop OneSignal Debugging
     OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-    OneSignal.shared.init("03f3837b-8e0f-4ff8-b7ae-c42723dad8d1", iOSSettings: {
+    OneSignal.shared.init("21785d93-f8d8-46fa-bbf3-cf6ae62a66d6", iOSSettings: {
       OSiOSSettings.autoPrompt: false,
       OSiOSSettings.inAppLaunchUrl: false
     });
