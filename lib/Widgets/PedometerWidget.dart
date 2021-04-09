@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:work_it_out/Screens/History.dart';
 import 'package:work_it_out/services/Auth.dart';
 import '../Widgets/BaseWidget.dart';
 import 'dart:async';
@@ -293,33 +294,43 @@ class _ActivityCardState extends State<ActivityCard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              child: CircularPercentIndicator(
-                                radius: 150.0,
-                                lineWidth: 15.0,
-                                animation: true,
-                                percent: percentCalc,
-                                center: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "$_steps",
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BarChartSample1(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                child: CircularPercentIndicator(
+                                  radius: 150.0,
+                                  lineWidth: 15.0,
+                                  animation: true,
+                                  percent: percentCalc,
+                                  center: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "$_steps",
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "/$personalStepChoice",
-                                      style: TextStyle(
-                                        fontSize: 15,
+                                      Text(
+                                        "/$personalStepChoice",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'Steps taken',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                                      Text(
+                                        'Steps taken',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

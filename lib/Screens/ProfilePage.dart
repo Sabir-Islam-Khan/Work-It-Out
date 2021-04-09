@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:work_it_out/Screens/History.dart';
 import 'package:work_it_out/Screens/HomePage.dart';
 import 'package:work_it_out/Screens/SignIn.dart';
 import '../services/Auth.dart';
@@ -131,6 +132,12 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             } else if (i == 1) {
               print("tapped history");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BarChartSample1(),
+                ),
+              );
             } else if (i == 2) {
               print("tapped profile");
             } else if (i == 3) {

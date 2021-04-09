@@ -1,3 +1,4 @@
+import 'package:work_it_out/Screens/History.dart';
 import 'package:work_it_out/Screens/ProfilePage.dart';
 import 'package:work_it_out/Screens/SignIn.dart';
 import 'package:work_it_out/Widgets/PedometerWidget.dart';
@@ -80,6 +81,12 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           } else if (i == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BarChartSample1(),
+              ),
+            );
             print("tapped history");
           } else if (i == 2) {
             print("tapped profile");
