@@ -24,6 +24,10 @@ abstract class AuthBase {
 class Auth implements AuthBase {
   final _firebaseAuth = FirebaseAuth.instance;
 
+  Future sendPasswordResetEmail(String email) async {
+    return _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   // method to use firebase user only here
   User _userFromFirebase(FirebaseUser user) {
     if (user == null) {

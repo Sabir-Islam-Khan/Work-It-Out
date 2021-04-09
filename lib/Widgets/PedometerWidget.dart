@@ -32,6 +32,7 @@ class _ActivityCardState extends State<ActivityCard> {
     readData();
   }
 
+  String _uid = '';
   CollectionReference users = Firestore.instance.collection('Users');
 
 //get count step
@@ -47,7 +48,7 @@ class _ActivityCardState extends State<ActivityCard> {
   Future<String> getUid() async {
     User user = await Auth().currentUser();
     setState(() {
-      test = user.uid;
+      _uid = user.uid;
     });
 
     print(user.uid);
@@ -63,12 +64,88 @@ class _ActivityCardState extends State<ActivityCard> {
     print(data['name']);
   }
 
+  Future<void> createData(String steps, String date) async {
+    String uid = await getUid();
+
+    DocumentSnapshot data =
+        await Firestore.instance.collection('Users').document(uid).get();
+
+    String today =
+        DateTime.now().day.toString() + "-" + DateTime.now().month.toString();
+    if (data['day1'] == 0 || data['day1'] == today) {
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day1': date,
+        'day1Steps': steps,
+      });
+    } else if (data['day2'] == 0 || data['day2'] == today) {
+      int todaySteps = int.parse(steps) - int.parse(data['day1Steps']);
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day2': date,
+        'day2Steps': todaySteps,
+      });
+    } else if (data['day3'] == 0 || data['day3'] == today) {
+      int todaySteps = int.parse(steps) -
+          int.parse(data['day1Steps']) -
+          int.parse(data['day2Steps']);
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day3': date,
+        'day3Steps': todaySteps,
+      });
+    } else if (data['day4'] == 0 || data['day4'] == today) {
+      int todaySteps = int.parse(steps) -
+          int.parse(data['day1Steps']) -
+          int.parse(data['day2Steps']) -
+          int.parse(data['day3Steps']);
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day4': date,
+        'day4Steps': todaySteps,
+      });
+    } else if (data['day5'] == 0 || data['day5'] == today) {
+      int todaySteps = int.parse(steps) -
+          int.parse(data['day1Steps']) -
+          int.parse(data['day2Steps']) -
+          int.parse(data['day3Steps']) -
+          int.parse(data['day4Steps']);
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day5': date,
+        'day5Steps': todaySteps,
+      });
+    } else if (data['day6'] == 0 || data['day6'] == today) {
+      int todaySteps = int.parse(steps) -
+          int.parse(data['day1Steps']) -
+          int.parse(data['day2Steps']) -
+          int.parse(data['day3Steps']) -
+          int.parse(data['day4Steps']) -
+          int.parse(data['day5Steps']);
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day6': date,
+        'day6Steps': todaySteps,
+      });
+    } else if (data['day7'] == 0 || data['day7'] == today) {
+      int todaySteps = int.parse(steps) -
+          int.parse(data['day1Steps']) -
+          int.parse(data['day2Steps']) -
+          int.parse(data['day3Steps']) -
+          int.parse(data['day4Steps']) -
+          int.parse(data['day5Steps']) -
+          int.parse(data['day6Steps']);
+      Firestore.instance.collection('Users').document(uid).updateData({
+        'day6': date,
+        'day6Steps': todaySteps,
+      });
+    }
+  }
+
 // get activity status change
   void onPedestrianStatusChanged(PedestrianStatus event) {
     print(event);
     setState(() {
       _status = event.status;
     });
+
+    String date =
+        DateTime.now().day.toString() + "-" + DateTime.now().month.toString();
+    createData(_steps, date);
   }
 
 //if activity status get any error or not available
@@ -95,9 +172,70 @@ class _ActivityCardState extends State<ActivityCard> {
         .onError(onPedestrianStatusError);
 
     _stepCountStream = Pedometer.stepCountStream;
+
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
 
     if (!mounted) return;
+  }
+
+  int dayStatus = 1;
+  int removable = 0;
+  void setStatus() async {
+    String uid = await getUid();
+
+    DocumentSnapshot data =
+        await Firestore.instance.collection('Users').document(uid).get();
+
+    if (data['day1'] == 0) {
+      setState(() {
+        dayStatus = 1;
+        removable = 0;
+      });
+    } else if (data['day2'] == 0) {
+      setState(() {
+        dayStatus = 2;
+        removable = int.parse(data['day1Steps']);
+      });
+    } else if (data['day3'] == 0) {
+      setState(() {
+        dayStatus = 3;
+        removable = int.parse(data['day1Steps']) + int.parse(data['day2Steps']);
+      });
+    } else if (data['day4'] == 0) {
+      setState(() {
+        dayStatus = 4;
+        removable = int.parse(data['day1Steps']) +
+            int.parse(data['day2Steps']) +
+            int.parse(data['day3Steps']);
+      });
+    } else if (data['day5'] == 0) {
+      setState(() {
+        dayStatus = 5;
+        removable = int.parse(data['day1Steps']) +
+            int.parse(data['day2Steps']) +
+            int.parse(data['day3Steps']) +
+            int.parse(data['day4Steps']);
+      });
+    } else if (data['day6'] == 0) {
+      setState(() {
+        dayStatus = 6;
+        removable = int.parse(data['day1Steps']) +
+            int.parse(data['day2Steps']) +
+            int.parse(data['day3Steps']) +
+            int.parse(data['day4Steps']) +
+            int.parse(data['day5Steps']);
+      });
+    } else if (data['day7'] == 0) {
+      setState(() {
+        dayStatus = 7;
+        removable = int.parse(data['day1Steps']) +
+            int.parse(data['day2Steps']) +
+            int.parse(data['day3Steps']) +
+            int.parse(data['day4Steps']) +
+            int.parse(data['day5Steps']) +
+            int.parse(data['day6Steps']);
+      });
+    }
   }
 
   var personalStepChoice = 6000;
@@ -165,10 +303,7 @@ class _ActivityCardState extends State<ActivityCard> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "$_steps",
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
+                                      "{$_steps }",
                                     ),
                                     Text(
                                       "/$personalStepChoice",

@@ -31,12 +31,14 @@ class _CreateAccountState extends State<CreateAccount> {
     Auth _auth = Auth();
 
     User _user = await _auth.currentUser();
-
+    String date =
+        DateTime.now().day.toString() + '-' + DateTime.now().month.toString();
     await Firestore.instance.collection('Users').document(_user.uid).setData(
       {
         'name': name,
         'email': email,
         'age': age,
+        'showDate': date,
         'weight': weight,
         'day1': 0,
         'day1Steps': 0,
@@ -63,7 +65,7 @@ class _CreateAccountState extends State<CreateAccount> {
     return MaterialApp(
       home: Scaffold(
         // appbar
-        resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         // main body
         // checking loading status
         body: isLoading == true
