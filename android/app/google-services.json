@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "274875220999",
-    "project_id": "workitout-cd1bb",
-    "storage_bucket": "workitout-cd1bb.appspot.com"
+    "project_number": "459846346555",
+    "project_id": "work-it-out-43d58",
+    "storage_bucket": "work-it-out-43d58.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:274875220999:android:301395f2f839d47bf556a2",
+        "mobilesdk_app_id": "1:459846346555:android:640a7b6d07145e2017b91e",
         "android_client_info": {
           "package_name": "com.example.work_it_out"
         }
       },
       "oauth_client": [
         {
-          "client_id": "274875220999-jb243pls9caesf7o8d88kjl7atirkg5l.apps.googleusercontent.com",
+          "client_id": "459846346555-hmdtja72go27iqksam5ff6c85g0g34ij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.work_it_out",
+            "certificate_hash": "1e37cdaf0737c02f90b47f916685176945cac15b"
+          }
+        },
+        {
+          "client_id": "459846346555-vsrrt99vj8i1junii8vkso9kttrjspko.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBD1luV9GA0lP-RJMCP_EJqmdnL7RD3kmw"
+          "current_key": "AIzaSyB3tG-kfG69e8cofTf2o2NA2NZrOcI15V0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "274875220999-jb243pls9caesf7o8d88kjl7atirkg5l.apps.googleusercontent.com",
+              "client_id": "459846346555-vsrrt99vj8i1junii8vkso9kttrjspko.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final picker = ImagePicker();
 
   final FirebaseStorage _storage =
-      FirebaseStorage(storageBucket: "gs://workitout-cd1bb.appspot.com");
+      FirebaseStorage(storageBucket: "gs://work-it-out-43d58.appspot.com");
 
   Future getImage() async {
     final pickedFile = await picker.getImage(
@@ -225,7 +225,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 print("Uid in profile is $_uid");
                                 uploadImage();
                               },
-                              child: Text("Save"),
+                              child: Text(
+                                "Upload ",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -261,26 +268,40 @@ class _ProfilePageState extends State<ProfilePage> {
                               return Column(
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: totalWidth * 0.1,
-                                      ),
-                                      Text(
-                                        "Name : ",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: totalWidth * 0.03,
-                                      ),
-                                      Text(
-                                        snapshot.data['name'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
+                                      Card(
+                                        elevation: 7.0,
+                                        child: Container(
+                                          height: totalHeight * 0.07,
+                                          width: totalWidth * 0.9,
+                                          color: Colors.grey[200],
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: totalWidth * 0.1,
+                                              ),
+                                              Text(
+                                                "Name : ",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: totalWidth * 0.05,
+                                              ),
+                                              Text(
+                                                snapshot.data['name'],
+                                                style: TextStyle(
+                                                  color: Colors.cyan[900],
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -289,26 +310,40 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: totalHeight * 0.03,
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: totalWidth * 0.1,
-                                      ),
-                                      Text(
-                                        "Email : ",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: totalWidth * 0.03,
-                                      ),
-                                      Text(
-                                        snapshot.data['email'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
+                                      Card(
+                                        elevation: 7.0,
+                                        child: Container(
+                                          height: totalHeight * 0.07,
+                                          width: totalWidth * 0.9,
+                                          color: Colors.grey[200],
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: totalWidth * 0.1,
+                                              ),
+                                              Text(
+                                                "Email : ",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: totalWidth * 0.05,
+                                              ),
+                                              Text(
+                                                snapshot.data['email'],
+                                                style: TextStyle(
+                                                  color: Colors.cyan[900],
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -317,26 +352,40 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: totalHeight * 0.03,
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: totalWidth * 0.1,
-                                      ),
-                                      Text(
-                                        "Age : ",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: totalWidth * 0.06,
-                                      ),
-                                      Text(
-                                        snapshot.data['age'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
+                                      Card(
+                                        elevation: 7.0,
+                                        child: Container(
+                                          height: totalHeight * 0.07,
+                                          width: totalWidth * 0.9,
+                                          color: Colors.grey[200],
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: totalWidth * 0.1,
+                                              ),
+                                              Text(
+                                                "Age : ",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: totalWidth * 0.05,
+                                              ),
+                                              Text(
+                                                snapshot.data['age'],
+                                                style: TextStyle(
+                                                  color: Colors.cyan[900],
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -345,26 +394,40 @@ class _ProfilePageState extends State<ProfilePage> {
                                     height: totalHeight * 0.03,
                                   ),
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: totalWidth * 0.1,
-                                      ),
-                                      Text(
-                                        "Weight : ",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: totalWidth * 0.03,
-                                      ),
-                                      Text(
-                                        snapshot.data['weight'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
+                                      Card(
+                                        elevation: 7.0,
+                                        child: Container(
+                                          height: totalHeight * 0.07,
+                                          width: totalWidth * 0.9,
+                                          color: Colors.grey[200],
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: totalWidth * 0.1,
+                                              ),
+                                              Text(
+                                                "Weight : ",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: totalWidth * 0.05,
+                                              ),
+                                              Text(
+                                                snapshot.data['weight'],
+                                                style: TextStyle(
+                                                  color: Colors.cyan[900],
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
