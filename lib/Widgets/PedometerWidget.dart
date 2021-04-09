@@ -303,7 +303,11 @@ class _ActivityCardState extends State<ActivityCard> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "{$_steps }",
+                                      "$_steps",
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                     Text(
                                       "/$personalStepChoice",

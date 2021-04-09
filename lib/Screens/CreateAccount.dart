@@ -40,6 +40,7 @@ class _CreateAccountState extends State<CreateAccount> {
         'age': age,
         'showDate': date,
         'weight': weight,
+        'profilePic': '',
         'day1': 0,
         'day1Steps': 0,
         'day2': 0,

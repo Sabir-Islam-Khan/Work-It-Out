@@ -1,3 +1,4 @@
+import 'package:work_it_out/Screens/ProfilePage.dart';
 import 'package:work_it_out/Screens/SignIn.dart';
 import 'package:work_it_out/Widgets/PedometerWidget.dart';
 import 'package:work_it_out/Widgets/WeatherCard.dart';
@@ -11,8 +12,8 @@ class HomePage extends StatefulWidget {
     return d.toString().substring(0, 19);
   }
 
-  final Auth auth;
-  HomePage({@required this.auth});
+  final AuthBase auth;
+  HomePage({@optionalTypeArgs this.auth});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -82,6 +83,12 @@ class _HomePageState extends State<HomePage> {
             print("tapped history");
           } else if (i == 2) {
             print("tapped profile");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(),
+              ),
+            );
           } else if (i == 3) {
             setState(() {
               print("ready to perform logout");

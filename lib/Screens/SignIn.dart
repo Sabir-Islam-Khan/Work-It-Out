@@ -9,7 +9,7 @@ import '../Services/Auth.dart';
 class SignIn extends StatefulWidget {
   // authbase instance
   final AuthBase auth;
-  SignIn({@required this.auth});
+  SignIn({@optionalTypeArgs this.auth});
 
   @override
   _SignInState createState() => _SignInState();
