@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:work_it_out/Screens/History.dart';
 import 'package:work_it_out/Screens/HomePage.dart';
 import 'package:work_it_out/Screens/SignIn.dart';
@@ -36,6 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   String _uid = '';
+  TextEditingController nameController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
   Future<String> getUid() async {
     User user = await Auth().currentUser();
     setState(() {
@@ -101,8 +105,6 @@ class _ProfilePageState extends State<ProfilePage> {
       _isLoading = false;
     });
   }
-
-  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +258,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         // ),
 
                         SizedBox(
-                          height: totalHeight * 0.1,
+                          height: totalHeight * 0.03,
                         ),
                         StreamBuilder<DocumentSnapshot>(
                           stream: Firestore.instance
@@ -277,10 +279,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                           width: totalWidth * 0.9,
                                           color: Colors.grey[200],
                                           child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              SizedBox(
-                                                width: totalWidth * 0.1,
-                                              ),
+                                              // SizedBox(
+                                              //   width: totalWidth * 0.1,
+                                              // ),
                                               Text(
                                                 "Name : ",
                                                 style: TextStyle(
@@ -289,9 +293,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   fontSize: 18.0,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: totalWidth * 0.05,
-                                              ),
+                                              // SizedBox(
+                                              //   width: totalWidth * 0.05,
+                                              // ),
                                               Text(
                                                 snapshot.data['name'],
                                                 style: TextStyle(
@@ -300,6 +304,102 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   fontSize: 18.0,
                                                 ),
                                               ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        Container(
+                                                      height: 500.0,
+                                                      color: Color.fromRGBO(
+                                                          135, 145, 253, .8),
+                                                      child: Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            height:
+                                                                totalHeight *
+                                                                    0.05,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    10.0),
+                                                            child: TextField(
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                      enabledBorder:
+                                                                          UnderlineInputBorder(
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              Colors.black,
+                                                                        ),
+                                                                      ),
+                                                                      labelText:
+                                                                          "Edit Name :",
+                                                                      labelStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                      ),
+                                                                      hintText:
+                                                                          "Change your name !",
+                                                                      hintStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                      )),
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .name,
+                                                              controller:
+                                                                  nameController,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                totalHeight *
+                                                                    0.05,
+                                                          ),
+                                                          Center(
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                print("$_uid");
+
+                                                                Firestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'Users')
+                                                                    .document(
+                                                                        _uid)
+                                                                    .updateData({
+                                                                  'name':
+                                                                      nameController
+                                                                          .value
+                                                                          .text,
+                                                                });
+
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Icon(
+                                                                  Icons.done,
+                                                                  size: 45.0,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  size: 26.0,
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ),
@@ -361,10 +461,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                           width: totalWidth * 0.9,
                                           color: Colors.grey[200],
                                           child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
                                             children: [
-                                              SizedBox(
-                                                width: totalWidth * 0.1,
-                                              ),
                                               Text(
                                                 "Age : ",
                                                 style: TextStyle(
@@ -372,9 +471,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18.0,
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: totalWidth * 0.05,
                                               ),
                                               Text(
                                                 snapshot.data['age'],
@@ -384,6 +480,102 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   fontSize: 18.0,
                                                 ),
                                               ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        Container(
+                                                      height: 500.0,
+                                                      color: Color.fromRGBO(
+                                                          135, 145, 253, .8),
+                                                      child: Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            height:
+                                                                totalHeight *
+                                                                    0.05,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    10.0),
+                                                            child: TextField(
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                      enabledBorder:
+                                                                          UnderlineInputBorder(
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              Colors.black,
+                                                                        ),
+                                                                      ),
+                                                                      labelText:
+                                                                          "Edit Age :",
+                                                                      labelStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                      ),
+                                                                      hintText:
+                                                                          "Change your age !",
+                                                                      hintStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                      )),
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              controller:
+                                                                  ageController,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                totalHeight *
+                                                                    0.05,
+                                                          ),
+                                                          Center(
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                print("$_uid");
+
+                                                                Firestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'Users')
+                                                                    .document(
+                                                                        _uid)
+                                                                    .updateData({
+                                                                  'age':
+                                                                      ageController
+                                                                          .value
+                                                                          .text,
+                                                                });
+
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Icon(
+                                                                  Icons.done,
+                                                                  size: 45.0,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  size: 26.0,
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ),
@@ -403,10 +595,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                           width: totalWidth * 0.9,
                                           color: Colors.grey[200],
                                           child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
                                             children: [
-                                              SizedBox(
-                                                width: totalWidth * 0.1,
-                                              ),
                                               Text(
                                                 "Weight : ",
                                                 style: TextStyle(
@@ -414,9 +605,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18.0,
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: totalWidth * 0.05,
                                               ),
                                               Text(
                                                 snapshot.data['weight'],
@@ -426,12 +614,128 @@ class _ProfilePageState extends State<ProfilePage> {
                                                   fontSize: 18.0,
                                                 ),
                                               ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                    context: context,
+                                                    builder: (context) =>
+                                                        Container(
+                                                      height: 500.0,
+                                                      color: Color.fromRGBO(
+                                                          135, 145, 253, .8),
+                                                      child: Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            height:
+                                                                totalHeight *
+                                                                    0.05,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    10.0),
+                                                            child: TextField(
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                      enabledBorder:
+                                                                          UnderlineInputBorder(
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              Colors.black,
+                                                                        ),
+                                                                      ),
+                                                                      labelText:
+                                                                          "Edit weight :",
+                                                                      labelStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                      ),
+                                                                      hintText:
+                                                                          "Change your weight !",
+                                                                      hintStyle:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                      )),
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              controller:
+                                                                  weightController,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                totalHeight *
+                                                                    0.05,
+                                                          ),
+                                                          Center(
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                print("$_uid");
+
+                                                                Firestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'Users')
+                                                                    .document(
+                                                                        _uid)
+                                                                    .updateData({
+                                                                  'weight':
+                                                                      weightController
+                                                                          .value
+                                                                          .text,
+                                                                });
+
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Icon(
+                                                                  Icons.done,
+                                                                  size: 45.0,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  size: 26.0,
+                                                ),
+                                              )
                                             ],
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
+                                  SizedBox(
+                                    height: totalHeight * 0.03,
+                                  ),
+                                  Center(
+                                      child: GestureDetector(
+                                    onTap: () {
+                                      _signOut();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SignIn(),
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.exit_to_app,
+                                      size: 40.0,
+                                      color: Colors.white,
+                                    ),
+                                  )),
                                 ],
                               );
                             } else {
